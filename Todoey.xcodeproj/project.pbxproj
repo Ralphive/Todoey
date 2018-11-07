@@ -22,6 +22,7 @@
 		CA0D0BAF219352E3001C8EF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA0D0BB2219352E3001C8EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA0D0BB4219352E3001C8EF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA0D0BBA21935371001C8EF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +61,7 @@
 				CA0D0BAF219352E3001C8EF2 /* Assets.xcassets */,
 				CA0D0BB1219352E3001C8EF2 /* LaunchScreen.storyboard */,
 				CA0D0BB4219352E3001C8EF2 /* Info.plist */,
+				CA0D0BBA21935371001C8EF2 /* .gitignore */,
 			);
 			path = Todoey;
 			sourceTree = "<group>";
