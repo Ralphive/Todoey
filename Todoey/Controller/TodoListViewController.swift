@@ -13,6 +13,11 @@ class TodoListViewController: UITableViewController  {
     var itemArray = [Item]()
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var selectedCategory : TodoCategory? {
+        didSet{
+            loadData()
+        }
+    }
     
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -60,7 +65,7 @@ class TodoListViewController: UITableViewController  {
         
         let action = UIAlertAction(title: "Add Item", style: .default){(action) in
             if (!textField.text!.isEmpty){
-                self.itemArray.append(Item(context: self.context, itemName: textField.text!))
+                self.itemArray.append(Item(context: self.context, itemName: textField.text!, parentCategory: self.selectedCategory!))
                 self.saveData()
             }
             self.tableView.reloadData()
@@ -84,7 +89,16 @@ class TodoListViewController: UITableViewController  {
     }
     
     func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest()){
-        //        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let predicate = request.predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, categoryPredicate])
+        }else{
+             request.predicate = categoryPredicate
+        }
+        
+       
         do{
             try itemArray = context.fetch(request)
             tableView.reloadData()

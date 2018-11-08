@@ -17,14 +17,15 @@ extension Item {
         return NSFetchRequest<Item>(entityName: "Item")
     }
 
-    @NSManaged public var itemName: String?
     @NSManaged public var checked: Bool
+    @NSManaged public var itemName: String?
+    @NSManaged public var parentCategory: TodoCategory?
     
-    
-    convenience init(context: NSManagedObjectContext,itemName: String) {
+    convenience init(context: NSManagedObjectContext,itemName: String, parentCategory: TodoCategory) {
         self.init(context:context)
         self.itemName = itemName
         self.checked = false
+        self.parentCategory = parentCategory
         
     }
 
