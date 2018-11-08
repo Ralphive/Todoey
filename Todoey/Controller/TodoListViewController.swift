@@ -15,6 +15,7 @@ class TodoListViewController: UITableViewController  {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     
     override func viewDidLoad() {
@@ -23,6 +24,7 @@ class TodoListViewController: UITableViewController  {
         //personal folder for this app
         
         print("Diretorio é o \(dataFilePath)")
+        searchBar.delegate = self
         
         loadData()
     }
@@ -81,16 +83,40 @@ class TodoListViewController: UITableViewController  {
         tableView.reloadData()
     }
     
-    func loadData(){
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
+    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest()){
+        //        let request : NSFetchRequest<Item> = Item.fetchRequest()
         do{
             try itemArray = context.fetch(request)
+            tableView.reloadData()
         }catch{
             print("Errror Fetching data from context \(error)")
         }
-        
- 
+        tableView.reloadData()
     }
     
+    func queryData(){
+        //Create Request
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        //Set conditions
+        request.predicate = NSPredicate(format: "itemName CONTAINS[cd] %@", searchBar.text!)
+        //Set Sorting
+        request.sortDescriptors = [NSSortDescriptor(key: "itemName", ascending: true)]
+        //Load Data
+        loadData(with: request)
+    }
+}
+
+//MARK: Serach Bar Methods
+extension TodoListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadData()
+            Diz§spatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }else{
+            queryData()
+        }
+    }
 }
 
