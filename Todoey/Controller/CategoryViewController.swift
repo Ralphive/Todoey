@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ChameleonFramework
 
 class CategoryViewController: UITableViewController {
     var categories = [TodoCategory]()
@@ -17,6 +18,7 @@ class CategoryViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.leftBarButtonItem = editButtonItem
+        tableView.separatorStyle = .none
         
         loadData()
     }
@@ -44,6 +46,14 @@ class CategoryViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         let category = categories[indexPath.row]
         cell.textLabel?.text = category.name
+        
+        if let colorHexString = category.color {
+            cell.backgroundColor = HexColor(colorHexString)
+        }else{
+            cell.backgroundColor = UIColor.randomFlat
+        }
+        
+        
         return cell
     }
     
@@ -73,6 +83,7 @@ class CategoryViewController: UITableViewController {
             if (!textField.text!.isEmpty){
                 let newCategory = TodoCategory(context: self.context)
                 newCategory.name = textField.text!
+                newCategory.color = UIColor.randomFlat.hexValue()
                 self.categories.append(newCategory)
                 self.saveData()
             }
@@ -109,4 +120,3 @@ class CategoryViewController: UITableViewController {
         
     }
 }
-

@@ -2,7 +2,7 @@
 //  TodoCategory+CoreDataProperties.swift
 //  Todoey
 //
-//  Created by Ralph on 08/11/2018.
+//  Created by Ralph on 14/11/2018.
 //  Copyright © 2018 Ralph. All rights reserved.
 //
 //
@@ -18,6 +18,7 @@ extension TodoCategory {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var color: String?
     @NSManaged public var items: NSSet?
 
 }

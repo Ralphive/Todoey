@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ChameleonFramework
 
 class TodoListViewController: UITableViewController  {
     var itemArray = [Item]()
@@ -43,6 +44,7 @@ class TodoListViewController: UITableViewController  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath)
         let item = itemArray[indexPath.row]
         cell.textLabel?.text = item.itemName
+        cell.backgroundColor = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row)/CGFloat(itemArray.count))
         cell.accessoryType = item.checked ? .checkmark : .none
         return cell
     }
