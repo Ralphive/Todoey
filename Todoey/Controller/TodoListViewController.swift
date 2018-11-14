@@ -29,12 +29,23 @@ class TodoListViewController: UITableViewController  {
         
         //personal folder for this app
         
-        print("Diretorio é o \(dataFilePath)")
+        //        print("Diretorio é o \(dataFilePath)")
         searchBar.delegate = self
         tableView.separatorStyle = .none
-
-        
         loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let colourHex = selectedCategory?.color{
+            guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist")}
+            
+            navBar.barTintColor = UIColor(hexString: colourHex)
+            searchBar.barTintColor = navBar.barTintColor
+            title = selectedCategory!.name
+            navBar.tintColor =   ContrastColorOf(navBar.barTintColor!, returnFlat: true)
+            
+        }
+        
     }
     
     //MARK: Tableview DS methods
@@ -49,9 +60,9 @@ class TodoListViewController: UITableViewController  {
         if let color = UIColor(hexString: selectedCategory!.color!)?.darken(byPercentage: CGFloat(indexPath.row)/CGFloat(itemArray.count)){
             cell.backgroundColor = color
             cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true)
-
-        }
             
+        }
+        
         cell.accessoryType = item.checked ? .checkmark : .none
         return cell
     }
@@ -107,10 +118,10 @@ class TodoListViewController: UITableViewController  {
         if let predicate = request.predicate {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, categoryPredicate])
         }else{
-             request.predicate = categoryPredicate
+            request.predicate = categoryPredicate
         }
         
-       
+        
         do{
             try itemArray = context.fetch(request)
             tableView.reloadData()

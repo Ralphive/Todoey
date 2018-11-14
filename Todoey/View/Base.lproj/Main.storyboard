@@ -77,7 +77,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="fj1-TK-kOq">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="kQ1-SY-bwS">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="H2f-mT-C4L" id="xfD-nH-9jq"/>
                             </connections>
@@ -96,11 +95,14 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vij-5Z-7UA" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bDg-gm-V6w">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="bDg-gm-V6w">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.20000000000000001" green="0.85098039219999999" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.34575632214546204" green="0.71323245763778687" blue="0.96984928846359253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
