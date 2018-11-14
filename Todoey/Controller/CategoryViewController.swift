@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ChameleonFramework
 
 class CategoryViewController: UITableViewController {
     var categories = [TodoCategory]()
@@ -15,7 +16,25 @@ class CategoryViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+        tableView.separatorStyle = .none
+        
         loadData()
+    }
+    
+    //MARK: Todo List deletion
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            context.delete(categories[indexPath.row])
+            categories.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
     //MARK: TableView Datasources methods
@@ -26,8 +45,19 @@ class CategoryViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         let category = categories[indexPath.row]
+        if let colorHexString = category.color {
+            cell.backgroundColor = HexColor(colorHexString)
+        }else{
+            cell.backgroundColor = UIColor.randomFlat
+        }
+        
         cell.textLabel?.text = category.name
+        cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
     }
     
     //MARK: Delegates
@@ -52,6 +82,7 @@ class CategoryViewController: UITableViewController {
             if (!textField.text!.isEmpty){
                 let newCategory = TodoCategory(context: self.context)
                 newCategory.name = textField.text!
+                newCategory.color = UIColor.randomFlat.hexValue()
                 self.categories.append(newCategory)
                 self.saveData()
             }
@@ -88,4 +119,3 @@ class CategoryViewController: UITableViewController {
         
     }
 }
-

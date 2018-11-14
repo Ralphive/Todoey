@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ChameleonFramework
 
 class TodoListViewController: UITableViewController  {
     var itemArray = [Item]()
@@ -28,10 +29,23 @@ class TodoListViewController: UITableViewController  {
         
         //personal folder for this app
         
-        print("Diretorio é o \(dataFilePath)")
+        //        print("Diretorio é o \(dataFilePath)")
         searchBar.delegate = self
-        
+        tableView.separatorStyle = .none
         loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let colourHex = selectedCategory?.color{
+            guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist")}
+            
+            navBar.barTintColor = UIColor(hexString: colourHex)
+            searchBar.barTintColor = navBar.barTintColor
+            title = selectedCategory!.name
+            navBar.tintColor =   ContrastColorOf(navBar.barTintColor!, returnFlat: true)
+            
+        }
+        
     }
     
     //MARK: Tableview DS methods
@@ -43,6 +57,12 @@ class TodoListViewController: UITableViewController  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath)
         let item = itemArray[indexPath.row]
         cell.textLabel?.text = item.itemName
+        if let color = UIColor(hexString: selectedCategory!.color!)?.darken(byPercentage: CGFloat(indexPath.row)/CGFloat(itemArray.count)){
+            cell.backgroundColor = color
+            cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true)
+            
+        }
+        
         cell.accessoryType = item.checked ? .checkmark : .none
         return cell
     }
@@ -54,6 +74,9 @@ class TodoListViewController: UITableViewController  {
         
         tableView.deselectRow(at: indexPath, animated: true)
         saveData()
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
     }
     
     //MARK: Add New Items
@@ -95,10 +118,10 @@ class TodoListViewController: UITableViewController  {
         if let predicate = request.predicate {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, categoryPredicate])
         }else{
-             request.predicate = categoryPredicate
+            request.predicate = categoryPredicate
         }
         
-       
+        
         do{
             try itemArray = context.fetch(request)
             tableView.reloadData()
@@ -118,9 +141,23 @@ class TodoListViewController: UITableViewController  {
         //Load Data
         loadData(with: request)
     }
+    
+    //MARK: Todo List deletion
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            context.delete(itemArray[indexPath.row])
+            itemArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
 
-//MARK: Serach Bar Methods
+//MARK: Search Bar Methods
 extension TodoListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
