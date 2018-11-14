@@ -31,6 +31,8 @@ class TodoListViewController: UITableViewController  {
         
         print("Diretorio é o \(dataFilePath)")
         searchBar.delegate = self
+        tableView.separatorStyle = .none
+
         
         loadData()
     }
@@ -44,7 +46,12 @@ class TodoListViewController: UITableViewController  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath)
         let item = itemArray[indexPath.row]
         cell.textLabel?.text = item.itemName
-        cell.backgroundColor = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row)/CGFloat(itemArray.count))
+        if let color = UIColor(hexString: selectedCategory!.color!)?.darken(byPercentage: CGFloat(indexPath.row)/CGFloat(itemArray.count)){
+            cell.backgroundColor = color
+            cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true)
+
+        }
+            
         cell.accessoryType = item.checked ? .checkmark : .none
         return cell
     }
@@ -56,6 +63,9 @@ class TodoListViewController: UITableViewController  {
         
         tableView.deselectRow(at: indexPath, animated: true)
         saveData()
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
     }
     
     //MARK: Add New Items

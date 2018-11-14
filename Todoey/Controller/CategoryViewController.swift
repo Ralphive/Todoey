@@ -45,15 +45,14 @@ class CategoryViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         let category = categories[indexPath.row]
-        cell.textLabel?.text = category.name
-        
         if let colorHexString = category.color {
             cell.backgroundColor = HexColor(colorHexString)
         }else{
             cell.backgroundColor = UIColor.randomFlat
         }
         
-        
+        cell.textLabel?.text = category.name
+        cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true)
         return cell
     }
     
