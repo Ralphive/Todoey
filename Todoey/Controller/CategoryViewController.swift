@@ -28,8 +28,6 @@ class CategoryViewController: UITableViewController {
             context.delete(categories[indexPath.row])
             categories.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-           // self.saveData()
-
         }
     }
     

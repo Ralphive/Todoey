@@ -118,9 +118,23 @@ class TodoListViewController: UITableViewController  {
         //Load Data
         loadData(with: request)
     }
+    
+    //MARK: Todo List deletion
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            context.delete(itemArray[indexPath.row])
+            itemArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
 
-//MARK: Serach Bar Methods
+//MARK: Search Bar Methods
 extension TodoListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
