@@ -15,7 +15,26 @@ class CategoryViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+        
         loadData()
+    }
+    
+    //MARK: Todo List deletion
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            context.delete(categories[indexPath.row])
+            categories.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+           // self.saveData()
+
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
     //MARK: TableView Datasources methods
@@ -28,6 +47,10 @@ class CategoryViewController: UITableViewController {
         let category = categories[indexPath.row]
         cell.textLabel?.text = category.name
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
     }
     
     //MARK: Delegates

@@ -5,7 +5,7 @@
         <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TodoCategory" inverseName="items" inverseEntity="TodoCategory" syncable="YES"/>
     </entity>
-    <entity name="TodoCategory" representedClassName="TodoCategory" syncable="YES" codeGenerationType="class">
+    <entity name="TodoCategory" representedClassName="TodoCategory" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="parentCategory" inverseEntity="Item" syncable="YES"/>
     </entity>

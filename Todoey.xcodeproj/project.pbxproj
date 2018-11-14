@@ -16,7 +16,8 @@
 		CA0D0BE921945B89001C8EF2 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0D0BE721945B89001C8EF2 /* Item+CoreDataClass.swift */; };
 		CA0D0BEA21945B89001C8EF2 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0D0BE821945B89001C8EF2 /* Item+CoreDataProperties.swift */; };
 		CA0D0BEC219483DF001C8EF2 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0D0BEB219483DF001C8EF2 /* CategoryViewController.swift */; };
-		CAC64F6F219494F000CF4217 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC64F6E219494F000CF4217 /* Item+CoreDataProperties.swift */; };
+		CA9B0C652194A21B00B0ECBD /* TodoCategory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9B0C632194A21B00B0ECBD /* TodoCategory+CoreDataClass.swift */; };
+		CA9B0C662194A21B00B0ECBD /* TodoCategory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9B0C642194A21B00B0ECBD /* TodoCategory+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +33,8 @@
 		CA0D0BE721945B89001C8EF2 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA0D0BE821945B89001C8EF2 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA0D0BEB219483DF001C8EF2 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
-		CAC64F6E219494F000CF4217 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Item+CoreDataProperties.swift"; path = "Todoey/Model/Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CA9B0C632194A21B00B0ECBD /* TodoCategory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoCategory+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CA9B0C642194A21B00B0ECBD /* TodoCategory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoCategory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +51,6 @@
 		CA0D0B9C219352E1001C8EF2 = {
 			isa = PBXGroup;
 			children = (
-				CAC64F6E219494F000CF4217 /* Item+CoreDataProperties.swift */,
 				CA0D0BA7219352E1001C8EF2 /* Todoey */,
 				CA0D0BA6219352E1001C8EF2 /* Products */,
 			);
@@ -80,6 +81,8 @@
 		CA0D0BE1219452A7001C8EF2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CA9B0C632194A21B00B0ECBD /* TodoCategory+CoreDataClass.swift */,
+				CA9B0C642194A21B00B0ECBD /* TodoCategory+CoreDataProperties.swift */,
 				CA0D0BE721945B89001C8EF2 /* Item+CoreDataClass.swift */,
 				CA0D0BE821945B89001C8EF2 /* Item+CoreDataProperties.swift */,
 				CA0D0BDE2194529E001C8EF2 /* DataModel.xcdatamodeld */,
@@ -184,12 +187,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAC64F6F219494F000CF4217 /* Item+CoreDataProperties.swift in Sources */,
 				CA0D0BAB219352E1001C8EF2 /* TodoListViewController.swift in Sources */,
+				CA9B0C662194A21B00B0ECBD /* TodoCategory+CoreDataProperties.swift in Sources */,
 				CA0D0BE02194529E001C8EF2 /* DataModel.xcdatamodeld in Sources */,
 				CA0D0BE921945B89001C8EF2 /* Item+CoreDataClass.swift in Sources */,
 				CA0D0BA9219352E1001C8EF2 /* AppDelegate.swift in Sources */,
 				CA0D0BEC219483DF001C8EF2 /* CategoryViewController.swift in Sources */,
+				CA9B0C652194A21B00B0ECBD /* TodoCategory+CoreDataClass.swift in Sources */,
 				CA0D0BEA21945B89001C8EF2 /* Item+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +343,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C4S4JRG8K2;
 				INFOPLIST_FILE = Todoey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -357,6 +362,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C4S4JRG8K2;
 				INFOPLIST_FILE = Todoey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
